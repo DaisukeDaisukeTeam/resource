@@ -32,7 +32,6 @@ class EventListener implements Listener
         $y = $block->getY();
         $z = $block->getZ();
         $level = $player->getLevel()->getName();
-        var_dump($level == "resource");
         if ($level == "resource")
             switch ($blockid) {
                 case 87:
@@ -62,7 +61,6 @@ class EventListener implements Listener
     {
         $setlevel = $this->Main->getServer()->getLevelByName("resource");
         $task = new ClosureTask(function (int $currentTick) use ($x, $y, $z, $blockid, $blockdamage, $setlevel): void {
-            var_dump("!!");
             $setlevel->setBlockIdAt($x, $y, $z, $blockid);
             $setlevel->setBlockDataAt($x, $y, $z, $blockdamage);
         });
