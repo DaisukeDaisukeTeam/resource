@@ -32,6 +32,7 @@ class EventListener implements Listener
         $y = $block->getY();
         $z = $block->getZ();
         $level = $player->getLevel()->getName();
+        var_dump($level == "resource");
         if ($level == "resource")
             switch ($blockid) {
                 case 87:
@@ -59,11 +60,11 @@ class EventListener implements Listener
 
     public function set($blockid, $blockdamage, $x, $y, $z)
     {
-        $setblock = Block::get($blockid, $blockdamage);
         $setlevel = $this->Main->getServer()->getLevelByName("resource");
-        $Vector3 = new Vector3($x, $y, $z); 
-        $task = new ClosureTask(function (int $currentTick) use ($Vector3, $setblock, $setlevel): void {
-            $setlevel->setBlock($Vector3, $setblock);
+        $task = new ClosureTask(function (int $currentTick) use ($x, $y, $z, $blockid, $blockdamage, $setlevel): void {
+            var_dump("!!");
+            $setlevel->setBlockIdAt($x, $y, $z, $blockid);
+            $setlevel->setBlockDataAt($x, $y, $z, $blockdamage);
         });
         $plugin = Server::getInstance()->getPluginManager()->getPlugin("Resource");
         /** @var Plugin $plugin */
